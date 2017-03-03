@@ -31,3 +31,9 @@ edges = (
     )
 
 
+def Draw_Cube():
+    glBegin(GL_LINES)
+    for edge in edges:
+        for vertex in edge:
+            glVertex3fv(vertices[vert])
+    glEnd()
