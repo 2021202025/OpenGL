@@ -37,3 +37,11 @@ def Draw_Cube():
         for vertex in edge:
             glVertex3fv(vertices[vert])
     glEnd()
+
+def main():
+    pygame.init()
+    display = (800,600)
+
+    pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
+
+    gluperspective(45.0, (display[0]/display[1]), 1, 50.0)
