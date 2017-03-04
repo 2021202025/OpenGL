@@ -47,7 +47,7 @@ def main():
     gluPerspective(45.0, (display[0]/display[1]), 1, 50.0)
 
     # Distance of view from object
-    glTranslatef(0.0,0.0,-15.0)
+    glTranslatef(0.0,0.0,-5.0)
 
     # Point of view for us
     glRotatef(40, 20, 20, 0)
@@ -59,7 +59,11 @@ def main():
                 pygame.quit()
                 quit()
 
-        #glRotatef(1, 1, 1, 1)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                print(event)
+                print(event.button)
+
+        glRotatef(1, 1, 1, 1)
 
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
         Draw_Cube()
