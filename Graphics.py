@@ -46,10 +46,11 @@ def main():
 
     gluPerspective(45.0, (display[0]/display[1]), 1, 50.0)
 
-    glTranslatef(0.0,0.0,-5.0)
+    # Distance of view from object
+    glTranslatef(0.0,0.0,-15.0)
 
-    #Point of view for us
-    glRotatef(50, 90, 0, 0)
+    # Point of view for us
+    glRotatef(40, 20, 20, 0)
 
     while True:
 
