@@ -31,10 +31,33 @@ edges = (
     )
 
 
+surfaces = (
+    (0,1,2,3),
+    (3,2,7,6),
+    (6,7,5,4),
+    (4,5,1,0),
+    (1,5,7,2),
+    (4,0,3,6),
+    )
+
 def Draw_Cube():
+
+    glBegin(GL_QUADS)
+    for surface in surfaces:
+        for vertex in surface:
+            glColor3fv((1,0,0))
+            glVertex3fv(vertices[vertex])
+
+
+
+
+    glEnd()
+
+    
     glBegin(GL_LINES)
     for edge in edges:
         for vertex in edge:
+            glColor3fv((1, 0, 0))
             glVertex3fv(vertices[vertex])
     glEnd()
 
@@ -44,13 +67,13 @@ def main():
 
     pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
 
-    gluPerspective(45.0, (display[0]/display[1]), 1, 50.0)
+    gluPerspective(45.0, (display[0]/display[1]), 0.1, 50.0)
 
     # Distance of view from object
-    glTranslatef(0.0,0.0,-5.0)
+    glTranslatef(0.0,0.0,-7.0)
 
     # Point of view for us
-    glRotatef(40, 20, 20, 0)
+    glRotatef(20, 2, 0, 0)
 
     while True:
 
