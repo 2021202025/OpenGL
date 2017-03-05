@@ -63,6 +63,11 @@ def main():
                 print(event)
                 print(event.button)
 
+                if event.button == 4:
+                    glTranslatef(0.0, 0.0, 1.0)
+                elif event.button == 5:
+                    glTranslatef(0.0,0.0,-1.0)
+
         glRotatef(1, 1, 1, 1)
 
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
