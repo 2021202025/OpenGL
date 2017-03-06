@@ -40,12 +40,34 @@ surfaces = (
     (4,0,3,6),
     )
 
+
+colors = (
+    (1,0,0),
+    (0,1,0),
+    (0,0,1),
+    (0,1,0),
+    (1,1,1),
+    (0,1,1),
+    (1,0,0),
+    (0,1,0),
+    (0,0,1),
+    (0,0,0),
+    (1,1,1),
+    (0,1,1),
+    )
+
+
 def Draw_Cube():
 
     glBegin(GL_QUADS)
+
+
+    
     for surface in surfaces:
+        x=0
         for vertex in surface:
-            glColor3fv((1,0,0))
+            x+=1
+            glColor3fv(colors[x])
             glVertex3fv(vertices[vertex])
 
 
@@ -57,9 +79,10 @@ def Draw_Cube():
     glBegin(GL_LINES)
     for edge in edges:
         for vertex in edge:
-            glColor3fv((1, 0, 0))
+            glColor3fv((1, 1, 1))
             glVertex3fv(vertices[vertex])
     glEnd()
+
 
 def main():
     pygame.init()
