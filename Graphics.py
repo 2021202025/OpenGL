@@ -47,7 +47,7 @@ colors = (
     (0,0,1),
     (0,1,0),
     (1,1,1),
-    (0,1,1),
+    (1,0,0),
     (1,0,0),
     (0,1,0),
     (0,0,1),
@@ -93,7 +93,7 @@ def main():
     gluPerspective(45.0, (display[0]/display[1]), 0.1, 50.0)
 
     # Distance of view from object
-    glTranslatef(0.0,0.0,-7.0)
+    glTranslatef(1.0,0.0,-7.0)
 
     # Point of view for us
     glRotatef(20, 2, 0, 0)
@@ -105,6 +105,17 @@ def main():
                 pygame.quit()
                 quit()
 
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    glTranslatef(-0.5,0,0)
+                if event.key == pygame.K_RIGHT:
+                    glTranslatef(0.5,0,0)
+
+                if event.key == pygame.K_UP:
+                    glTranslatef(0,0.5,0)
+                if event.key == pygame.K_DOWN:
+                    glTranslatef(0,-0.5,0)
+
             if event.type == pygame.MOUSEBUTTONDOWN:
                 print(event)
                 print(event.button)
@@ -114,7 +125,7 @@ def main():
                 elif event.button == 5:
                     glTranslatef(0.0,0.0,-1.0)
 
-        glRotatef(1, 1, 1, 1)
+        #glRotatef(1, 1, 1, 1)
 
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
         Draw_Cube()
