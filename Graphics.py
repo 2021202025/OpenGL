@@ -4,6 +4,8 @@ from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
+import random
+
 vertices = (
     (1, -1, -1),
     (1, 1, -1),
@@ -93,9 +95,12 @@ def main():
     gluPerspective(45.0, (display[0]/display[1]), 0.1, 50.0)
 
     # Distance of view from object
-    glTranslatef(0.0,0.0,-40.0)
+    glTranslatef(random.randrange(-5,5),random.randrange(-5,5),-40.0)
 
     object_passed = False
+
+    x_move = 0
+    y_move = 0
 
     # Point of view for us
     #glRotatef(25, 2, 1, 0)
@@ -109,15 +114,32 @@ def main():
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    glTranslatef(-0.5,0,0)
+                    #glTranslatef(-0.5,0,0)
+                    x_move = -0.3
                 if event.key == pygame.K_RIGHT:
-                    glTranslatef(0.5,0,0)
-
+                    #glTranslatef(0.5,0,0)
+                    x_move = 0.3
+                    
                 if event.key == pygame.K_UP:
-                    glTranslatef(0,0.5,0)
+                    #glTranslatef(0,0.5,0)
+                    y_move = 0.3
                 if event.key == pygame.K_DOWN:
-                    glTranslatef(0,-0.5,0)
+                    #glTranslatef(0,-0.5,0)
+                    y_move = -0.3
 
+
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                    #glTranslatef(0.5,0,0)
+                    x_move = 0
+                    
+                if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                    #glTranslatef(0,-0.5,0)
+                    y_move = 0
+
+
+
+                    
 ##            if event.type == pygame.MOUSEBUTTONDOWN:
 ##                print(event)
 ##                print(event.button)
@@ -143,7 +165,7 @@ def main():
 
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
-        glTranslatef(0,0,0.40)
+        glTranslatef(x_move,y_move,0.40)
         
         Draw_Cube()
         pygame.display.flip()
