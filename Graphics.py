@@ -93,12 +93,14 @@ def main():
     gluPerspective(45.0, (display[0]/display[1]), 0.1, 50.0)
 
     # Distance of view from object
-    glTranslatef(1.0,0.0,-40.0)
+    glTranslatef(0.0,0.0,-40.0)
+
+    object_passed = False
 
     # Point of view for us
     #glRotatef(25, 2, 1, 0)
 
-    while True:
+    while not object_passed:
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -127,6 +129,17 @@ def main():
 
         #glRotatef(1, 1, 1, 1)
                     
+        x = glGetDoublev(GL_MODELVIEW_MATRIX)
+        #print(x)
+
+        
+        camera_x = x[3][0]        
+        camera_y = x[3][1]
+        camera_z = x[3][2]
+
+        if camera_z < -1:
+            object_passed = True
+
 
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
@@ -137,3 +150,5 @@ def main():
         pygame.time.wait(10)
 
 main()
+##pygame.quit()
+##quit()
