@@ -93,10 +93,10 @@ def main():
     gluPerspective(45.0, (display[0]/display[1]), 0.1, 50.0)
 
     # Distance of view from object
-    glTranslatef(1.0,0.0,-7.0)
+    glTranslatef(1.0,0.0,-40.0)
 
     # Point of view for us
-    glRotatef(20, 2, 0, 0)
+    #glRotatef(25, 2, 1, 0)
 
     while True:
 
@@ -116,18 +116,22 @@ def main():
                 if event.key == pygame.K_DOWN:
                     glTranslatef(0,-0.5,0)
 
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                print(event)
-                print(event.button)
-
-                if event.button == 4:
-                    glTranslatef(0.0, 0.0, 1.0)
-                elif event.button == 5:
-                    glTranslatef(0.0,0.0,-1.0)
+##            if event.type == pygame.MOUSEBUTTONDOWN:
+##                print(event)
+##                print(event.button)
+##
+##                if event.button == 4:
+##                    glTranslatef(0.0, 0.0, 1.0)
+##                elif event.button == 5:
+##                    glTranslatef(0.0,0.0,-1.0)
 
         #glRotatef(1, 1, 1, 1)
+                    
 
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
+
+        glTranslatef(0,0,0.10)
+        
         Draw_Cube()
         pygame.display.flip()
         pygame.time.wait(10)
