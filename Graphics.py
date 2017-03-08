@@ -143,12 +143,15 @@ def main():
 
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
-        glTranslatef(0,0,0.10)
+        glTranslatef(0,0,0.40)
         
         Draw_Cube()
         pygame.display.flip()
         pygame.time.wait(10)
 
-main()
-##pygame.quit()
-##quit()
+for x in range (10):
+    main()
+
+    
+pygame.quit()
+quit()
