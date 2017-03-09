@@ -58,8 +58,29 @@ colors = (
     (0,1,1),
     )
 
+def set_vertices(max_distance):
+    x_value_change = random.randrange(-10,10)
+    y_value_change = random.randrange(-10,10)
+    z_value_change = random.randrange(-1*max_distance,-20)
 
-def Draw_Cube():
+    new_vertices = []
+
+    for vert in vertices:
+        new_vert = []
+
+        new_x = vert[0] + x_value_change
+        new_y = vert[1] + y_value_change
+        new_z = vert[2] + z_value_change
+
+        new_vert.append(new_x)
+        new_vert.append(new_y)
+        new_vert.append(new_z)
+
+        new_vertices.append(new_vert)
+
+    return new_vertices
+
+def Draw_Cube(vertices):
 
     glBegin(GL_QUADS)
 
@@ -88,7 +109,7 @@ def Draw_Cube():
 
 def main():
     pygame.init()
-    display = (800,600)
+    display = (1280,720)
 
     pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
 
@@ -102,6 +123,14 @@ def main():
     x_move = 0
     y_move = 0
 
+    max_distance = 300
+
+
+    cube_dict = {}
+
+    for x in range(75):
+        cube_dict[x] = set_vertices(max_distance)
+    
     # Point of view for us
     #glRotatef(25, 2, 1, 0)
 
@@ -165,9 +194,11 @@ def main():
 
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
-        glTranslatef(x_move,y_move,0.40)
-        
-        Draw_Cube()
+        glTranslatef(x_move,y_move,0.30)
+
+        for each_cube in cube_dict:
+            Draw_Cube(cube_dict[each_cube])
+
         pygame.display.flip()
         pygame.time.wait(10)
 
