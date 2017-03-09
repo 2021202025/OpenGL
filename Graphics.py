@@ -58,6 +58,22 @@ colors = (
     (0,1,1),
     )
 
+##ground_vertices = (
+##    (-10, -1.1, 20),
+##    (10, -1.1, 20),
+##    (-10, -1.1, -300),
+##    (10, -1.1, -300),
+##    )
+##
+##
+##def ground():
+##    glBegin(GL_QUADS)
+##    for vertex in ground_vertices:
+##        glColor3fv((1,0,0))
+##        glVertex3fv(vertex)
+##
+##    glEnd()
+  
 def set_vertices(max_distance):
     x_value_change = random.randrange(-10,10)
     y_value_change = random.randrange(-10,10)
@@ -109,7 +125,7 @@ def Draw_Cube(vertices):
 
 def main():
     pygame.init()
-    display = (1280,720)
+    display = (800,600)
 
     pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
 
@@ -118,23 +134,23 @@ def main():
     # Distance of view from object
     glTranslatef(random.randrange(-5,5),random.randrange(-5,5),-40.0)
 
-    object_passed = False
+    #object_passed = False
 
     x_move = 0
     y_move = 0
 
-    max_distance = 300
+    max_distance = 100
 
 
     cube_dict = {}
 
-    for x in range(75):
+    for x in range(20):
         cube_dict[x] = set_vertices(max_distance)
     
     # Point of view for us
     #glRotatef(25, 2, 1, 0)
 
-    while not object_passed:
+    while True:
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -144,17 +160,17 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     #glTranslatef(-0.5,0,0)
-                    x_move = -0.3
+                    x_move = 0.3
                 if event.key == pygame.K_RIGHT:
                     #glTranslatef(0.5,0,0)
-                    x_move = 0.3
+                    x_move = -0.3
                     
                 if event.key == pygame.K_UP:
                     #glTranslatef(0,0.5,0)
-                    y_move = 0.3
+                    y_move = -0.3
                 if event.key == pygame.K_DOWN:
                     #glTranslatef(0,-0.5,0)
-                    y_move = -0.3
+                    y_move = 0.3
 
 
             if event.type == pygame.KEYUP:
@@ -188,14 +204,13 @@ def main():
         camera_y = x[3][1]
         camera_z = x[3][2]
 
-        if camera_z < -1:
-            object_passed = True
-
 
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
         glTranslatef(x_move,y_move,0.30)
 
+        #ground()
+        
         for each_cube in cube_dict:
             Draw_Cube(cube_dict[each_cube])
 
