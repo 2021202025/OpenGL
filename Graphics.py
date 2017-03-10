@@ -74,10 +74,10 @@ colors = (
 ##
 ##    glEnd()
   
-def set_vertices(max_distance):
+def set_vertices(max_distance, min_distance = -20):
     x_value_change = random.randrange(-10,10)
     y_value_change = random.randrange(-10,10)
-    z_value_change = random.randrange(-1*max_distance,-20)
+    z_value_change = random.randrange(-1*max_distance,min_distance)
 
     new_vertices = []
 
@@ -106,7 +106,7 @@ def Draw_Cube(vertices):
         x=0
         for vertex in surface:
             x+=1
-            glColor3fv(colors[x])
+            glColor3fv((1,0,0))
             glVertex3fv(vertices[vertex])
 
 
@@ -118,7 +118,7 @@ def Draw_Cube(vertices):
     glBegin(GL_LINES)
     for edge in edges:
         for vertex in edge:
-            glColor3fv((1, 1, 1))
+            glColor3fv((1, 0, 0))
             glVertex3fv(vertices[vertex])
     glEnd()
 
@@ -129,7 +129,9 @@ def main():
 
     pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
 
-    gluPerspective(45.0, (display[0]/display[1]), 0.1, 50.0)
+    max_distance = 100
+    
+    gluPerspective(45.0, (display[0]/display[1]), 0.1, 100.0)
 
     # Distance of view from object
     glTranslatef(random.randrange(-5,5),random.randrange(-5,5),-40.0)
@@ -138,8 +140,6 @@ def main():
 
     x_move = 0
     y_move = 0
-
-    max_distance = 100
 
 
     cube_dict = {}
@@ -213,6 +213,18 @@ def main():
         
         for each_cube in cube_dict:
             Draw_Cube(cube_dict[each_cube])
+
+        delete_list = []
+
+        for each_cube in cube_dict:
+            if camera_z <= cube_dict[each_cube][0][2]:
+                print("passed a cube")
+                #delete_list.append(each_cube)
+                new_max = int(-1*(camera_z-max_distance))
+
+                cube_dict[each_cube] = set_vertices(new_max, int(camera_z))
+
+                
 
         pygame.display.flip()
         pygame.time.wait(10)
