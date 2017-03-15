@@ -74,9 +74,14 @@ colors = (
 ##
 ##    glEnd()
   
-def set_vertices(max_distance, min_distance = -20):
-    x_value_change = random.randrange(-10,10)
-    y_value_change = random.randrange(-10,10)
+def set_vertices(max_distance, min_distance = -20, camera_x = 0, camera_y = 0):
+
+    camera_x = -1*int(camera_x)
+    camera_y = -1*int(camera_y)
+
+    
+    x_value_change = random.randrange(camera_x-75,camera_x+75)
+    y_value_change = random.randrange(camera_y-75,camera_y+75)
     z_value_change = random.randrange(-1*max_distance,min_distance)
 
     new_vertices = []
@@ -134,7 +139,7 @@ def main():
     gluPerspective(45.0, (display[0]/display[1]), 0.1, 100.0)
 
     # Distance of view from object
-    glTranslatef(random.randrange(-5,5),random.randrange(-5,5),-40.0)
+    glTranslatef(0,0,-40.0)
 
     #object_passed = False
 
