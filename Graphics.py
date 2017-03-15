@@ -151,7 +151,7 @@ def main():
 
     cube_dict = {}
 
-    for x in range(20):
+    for x in range(50):
         cube_dict[x] = set_vertices(max_distance)
     
     # Point of view for us
@@ -192,15 +192,6 @@ def main():
 
 
                     
-##            if event.type == pygame.MOUSEBUTTONDOWN:
-##                print(event)
-##                print(event.button)
-##
-##                if event.button == 4:
-##                    glTranslatef(0.0, 0.0, 1.0)
-##                elif event.button == 5:
-##                    glTranslatef(0.0,0.0,-1.0)
-
         #glRotatef(1, 1, 1, 1)
                     
         x = glGetDoublev(GL_MODELVIEW_MATRIX)
@@ -217,7 +208,7 @@ def main():
 
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
-        glTranslatef(x_move,y_move,0.30)
+        glTranslatef(x_move,y_move,2)
 
         #ground()
         
@@ -228,10 +219,7 @@ def main():
 
         for each_cube in cube_dict:
             if camera_z <= cube_dict[each_cube][0][2]:
-                print("passed a cube")
-                #delete_list.append(each_cube)
                 new_max = int(-1*(camera_z-(max_distance*2)))
-
                 cube_dict[each_cube] = set_vertices(new_max, int(camera_z), cur_x, cur_y)
 
                 
