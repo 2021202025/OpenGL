@@ -146,6 +146,8 @@ def main():
     x_move = 0
     y_move = 0
 
+    cur_x = 0
+    cur_y = 0
 
     cube_dict = {}
 
@@ -210,6 +212,9 @@ def main():
         camera_z = x[3][2]
 
 
+        cur_x += x_move
+        cur_y += y_move
+
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
         glTranslatef(x_move,y_move,0.30)
@@ -225,14 +230,14 @@ def main():
             if camera_z <= cube_dict[each_cube][0][2]:
                 print("passed a cube")
                 #delete_list.append(each_cube)
-                new_max = int(-1*(camera_z-max_distance))
+                new_max = int(-1*(camera_z-(max_distance*2)))
 
-                cube_dict[each_cube] = set_vertices(new_max, int(camera_z))
+                cube_dict[each_cube] = set_vertices(new_max, int(camera_z), cur_x, cur_y)
 
                 
 
         pygame.display.flip()
-        pygame.time.wait(10)
+        #pygame.time.wait(10)
 
 for x in range (10):
     main()
