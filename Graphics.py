@@ -149,6 +149,9 @@ def main():
     cur_x = 0
     cur_y = 0
 
+    game_speed = 2
+    direction_speed = 1.5
+    
     cube_dict = {}
 
     for x in range(50):
@@ -167,17 +170,17 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     #glTranslatef(-0.5,0,0)
-                    x_move = 0.3
+                    x_move = direction_speed
                 if event.key == pygame.K_RIGHT:
                     #glTranslatef(0.5,0,0)
-                    x_move = -0.3
+                    x_move = -1*direction_speed
                     
                 if event.key == pygame.K_UP:
                     #glTranslatef(0,0.5,0)
-                    y_move = -0.3
+                    y_move = -1*direction_speed
                 if event.key == pygame.K_DOWN:
                     #glTranslatef(0,-0.5,0)
-                    y_move = 0.3
+                    y_move = direction_speed
 
 
             if event.type == pygame.KEYUP:
@@ -208,7 +211,7 @@ def main():
 
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
-        glTranslatef(x_move,y_move,2)
+        glTranslatef(x_move,y_move,game_speed)
 
         #ground()
         
